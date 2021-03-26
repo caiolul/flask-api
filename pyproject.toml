@@ -8,6 +8,7 @@ authors = ["caiolul <caiolucena.il@gmail.com>"]
 python = "^3.9"
 Flask = "^1.1.2"
 Flask-SQLAlchemy = "^2.5.1"
+Flask-Migrate = "^2.7.0"
 
 [tool.poetry.dev-dependencies]
 
