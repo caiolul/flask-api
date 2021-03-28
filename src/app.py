@@ -11,6 +11,12 @@ def create_app():
     app = Flask(__name__)
     path = '%s/migrations' % (curren_path)
     if app.debug == True:
+        # Env database
+        # postgresql://username:password@localhost:5432/database
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:api@localhost:5432/postgres'
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    else:
+        # production database
         app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:api@localhost:5432/postgres'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     views_init(app)
