@@ -1,5 +1,6 @@
-from flask import Flask
-# from src.ext.db import ...
+from flask import Flask, request, json, jsonify
+from src.ext.db.models import User, db
+from src.ext.api.serializer import UserShcema
 
 
 def init_app(app: Flask):
@@ -7,6 +8,16 @@ def init_app(app: Flask):
     def index():
         return {'ola': 'mundo'}
 
-    @app.route('/state', methods=['GET', 'POST'])
-    def register_state():
-        return{'patos': ['500 vacinados', '500 sem vacinação']}
+    @app.route('/user/list', methods=['GET'])
+    def list_user():
+        user = UserShcema(many=True)
+        result = User.query.all()
+        return user.jsonify(result), 200
+
+    @app.route('/user/add', methods=['POST'])
+    def create_user():
+        user = UserShcema()
+        data = user.loads(json.dumps(request.json))
+        db.session.add(data)
+        db.session.commit()
+        return user.jsonify(data), 201

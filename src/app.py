@@ -1,6 +1,7 @@
 import os
 from src.views.views import init_app as views_init
-from src.ext.db.db_connection import configure as configure_db
+from src.ext.db.models import configure as configure_db
+from src.ext.api.serializer import configure as config_marshmallow
 from flask_migrate import Migrate
 from flask import Flask
 
@@ -21,6 +22,7 @@ def create_app():
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     views_init(app)
     configure_db(app)
+    config_marshmallow(app)
 
     Migrate(app, app.db, path)
     return app
