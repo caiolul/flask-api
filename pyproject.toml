@@ -2,7 +2,7 @@
 name = "flask-api"
 version = "0.1.0"
 description = "api using flask"
-authors = ["caiolul <caiolucena.il@gmail.com>"]
+authors = ["caiolul"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
